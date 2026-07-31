@@ -1,0 +1,42 @@
+# --- Python ---
+venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# --- Secrets / local config ---
+.env
+*.env.local
+
+# --- Datasets (downloaded via notebooks/scripts, not committed) ---
+data/
+Celeb-DF-v2/
+*.crdownload
+*.zip
+*.tar.gz
+
+# --- Model artifacts / checkpoints ---
+models/
+checkpoints/
+*.pt
+*.pth
+*.onnx
+*.ckpt
+*.safetensors
+runs/
+wandb/
+mlruns/
+
+# --- Frontend ---
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.vite/
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

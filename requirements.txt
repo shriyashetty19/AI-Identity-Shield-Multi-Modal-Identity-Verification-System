@@ -1,0 +1,31 @@
+# Torch/torchvision are pre-installed on Colab. For local dev with an NVIDIA
+# GPU, install them first with the matching CUDA index, e.g.:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
+# then install the rest of this file.
+torch
+torchvision
+
+transformers>=4.40
+sentencepiece
+protobuf
+
+opencv-python-headless
+easyocr
+pillow
+numpy
+scikit-learn
+scikit-image
+matplotlib
+seaborn
+grad-cam
+tqdm
+python-dotenv
+python-dateutil
+roboflow
+
+fastapi
+uvicorn[standard]
+python-multipart
+pydantic
+
+pytest
