@@ -119,3 +119,29 @@ src/             training + inference code, importable by notebooks & backend
 backend/         FastAPI app
 frontend/        React app
 ```
+
+## 👥 Team Contributions
+
+Work is split into three vertical ownership tracks — computer-vision forensics, OCR/data engineering, and system integration — sized so each person carries a comparable mix of research effort, implementation effort, and debugging effort rather than an equal file count.
+
+| Team Member | Responsibilities |
+|---|---|
+| **Shriya Shetty** | **Document Forgery Detection & Visual Forensics (Computer Vision core)**<br>• ResNet-50 tamper classifier: architecture, training loop, checkpoints (`src/forgery_detection/model.py`, `train.py`)<br>• Error Level Analysis forensic preprocessing (`forensics.py`) and copy-move/clone detection (`copy_move.py`)<br>• Synthetic tampering generator used to create labeled forged samples from authentic MIDV-2020 scans (`scripts/generate_synthetic_tampering.py`, `generate_forgery_crops.py`)<br>• Crop-based region inference — the approach that replaced five failed whole-image classification attempts and got the model to 100% precision / 21.5% recall (`region_inference.py`, `inference.py`)<br>• Grad-CAM explainability overlays for tamper localization (`gradcam.py`) and quantitative eval (`evaluate.py`, confusion matrix, `outputs/gradcam/*`)<br>• Colab training/eval walkthrough (`notebooks/01_document_forgery_detection.ipynb`)<br>• **Phase 2:** Deepfake/liveness detection (ViT/EfficientNet on FaceForensics++/Celeb-DF)<br>• Wires the forgery branch into `backend/app/pipeline.py::run_forgery_detection`<br>• Unit tests: `test_copy_move.py`, `test_tampering.py`; module docs for the forensics pipeline |
+| **Arjun B Shetty** | **OCR Field Extraction, Field Localization & Data Engineering**<br>• Field-detector model that both OCR and the forgery cropper depend on: architecture, training, eval (`src/field_detection/model.py`, `train.py`, `evaluate.py`, `dataset.py`)<br>• OCR field extraction with detector-driven and Donut fallback extractors (`src/ocr/extract.py`) and field-level validation/regex/fuzzy-match rules (`src/ocr/validate.py`) — current accuracy: name ~80%, DOB 100%, overall doc ~73%<br>• Dataset acquisition and COCO-format annotation tooling (`src/common/coco_utils.py`, `scripts/download_midv2020.py`, `download_funsd.py`, `download_lfw.py`)<br>• OCR accuracy benchmarking harness (`scripts/evaluate_ocr.py`)<br>• **Phase 2:** Face matching (ArcFace/FaceNet) using the already-provisioned LFW pipeline<br>• Wires the OCR/field branch into `backend/app/pipeline.py::run_ocr`<br>• Unit tests: `test_coco_utils.py`, `test_validate.py`; dataset/license documentation (`scripts/deepfake_dataset_access.md`, Datasets table) |
+| **Khushi** | **System Integration, Backend/Frontend Architecture & Verification Engine**<br>• FastAPI service: request/response schemas, upload handling, startup model loading (`backend/app/main.py`, `schemas.py`)<br>• `VerificationPipeline` orchestration layer that composes the forgery + OCR branches into one report and status decision (`backend/app/pipeline.py`)<br>• React frontend: upload flow, API client, verification report UI (`frontend/src/App.jsx`, `api.js`, `components/UploadForm.jsx`, `components/VerificationReport.jsx`)<br>• **Phase 2:** Weighted trust-score verification engine that fuses forgery + OCR + face + deepfake signals into VERIFIED/FLAGGED/FAILED, and the multi-signal frontend report<br>• Environment/config and reproducibility: `.env.example`, `requirements.txt`, `pytest.ini`, dataset/model path config (`src/common/config.py`)<br>• End-to-end/API integration testing across all three modules’ outputs<br>• Owns architecture diagram, setup/run instructions, and overall README maintenance |
+
+## 🤝 Shared Responsibilities
+
+- Project planning and Phase 1/Phase 2 scope decisions
+- Architecture design (pipeline diagram, model interfaces, API contracts between modules)
+- Final integration of all three tracks into a single verification report
+- Cross-review of each other's code (forensics ↔ OCR ↔ backend/frontend)
+- Final end-to-end testing before each milestone
+- Documentation review (README, notebooks, dataset access notes)
+- Presentation / demo preparation
+
+## Contribution Summary
+
+- Shriya Shetty — 33.33%
+- Arjun B Shetty — 33.33%
+- Khushi — 33.33%
