@@ -120,7 +120,7 @@ backend/         FastAPI app
 frontend/        React app
 ```
 
-## 👥 Team Contributions
+## Team Contributions
 
 Work is split into three vertical ownership tracks — computer-vision forensics, OCR/data engineering, and system integration — sized so each person carries a comparable mix of research effort, implementation effort, and debugging effort rather than an equal file count.
 
@@ -130,7 +130,7 @@ Work is split into three vertical ownership tracks — computer-vision forensics
 | **Arjun B Shetty** | **OCR Field Extraction, Field Localization & Data Engineering**<br>• Field-detector model that both OCR and the forgery cropper depend on: architecture, training, eval (`src/field_detection/model.py`, `train.py`, `evaluate.py`, `dataset.py`)<br>• OCR field extraction with detector-driven and Donut fallback extractors (`src/ocr/extract.py`) and field-level validation/regex/fuzzy-match rules (`src/ocr/validate.py`) — current accuracy: name ~80%, DOB 100%, overall doc ~73%<br>• Dataset acquisition and COCO-format annotation tooling (`src/common/coco_utils.py`, `scripts/download_midv2020.py`, `download_funsd.py`, `download_lfw.py`)<br>• OCR accuracy benchmarking harness (`scripts/evaluate_ocr.py`)<br>• **Phase 2:** Face matching (ArcFace/FaceNet) using the already-provisioned LFW pipeline<br>• Wires the OCR/field branch into `backend/app/pipeline.py::run_ocr`<br>• Unit tests: `test_coco_utils.py`, `test_validate.py`; dataset/license documentation (`scripts/deepfake_dataset_access.md`, Datasets table) |
 | **Khushi** | **System Integration, Backend/Frontend Architecture & Verification Engine**<br>• FastAPI service: request/response schemas, upload handling, startup model loading (`backend/app/main.py`, `schemas.py`)<br>• `VerificationPipeline` orchestration layer that composes the forgery + OCR branches into one report and status decision (`backend/app/pipeline.py`)<br>• React frontend: upload flow, API client, verification report UI (`frontend/src/App.jsx`, `api.js`, `components/UploadForm.jsx`, `components/VerificationReport.jsx`)<br>• **Phase 2:** Weighted trust-score verification engine that fuses forgery + OCR + face + deepfake signals into VERIFIED/FLAGGED/FAILED, and the multi-signal frontend report<br>• Environment/config and reproducibility: `.env.example`, `requirements.txt`, `pytest.ini`, dataset/model path config (`src/common/config.py`)<br>• End-to-end/API integration testing across all three modules’ outputs<br>• Owns architecture diagram, setup/run instructions, and overall README maintenance |
 
-## 🤝 Shared Responsibilities
+## Shared Responsibilities
 
 - Project planning and Phase 1/Phase 2 scope decisions
 - Architecture design (pipeline diagram, model interfaces, API contracts between modules)
@@ -139,9 +139,3 @@ Work is split into three vertical ownership tracks — computer-vision forensics
 - Final end-to-end testing before each milestone
 - Documentation review (README, notebooks, dataset access notes)
 - Presentation / demo preparation
-
-## Contribution Summary
-
-- Shriya Shetty — 33.33%
-- Arjun B Shetty — 33.33%
-- Khushi — 33.33%
