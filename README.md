@@ -1,0 +1,2 @@
+# AI-Identity-Shield-Multi-Modal-Identity-Verification-System
+AI-powered identity verification system using a fine-tuned ResNet-50 to detect ID/document forgery, trained on MIDV-2020 and synthetic tampered samples. Includes Grad-CAM for explainability and a TrOCR-based OCR pipeline for structured field extraction. Currently adding face-matching and deepfake/liveness detection for full KYC automation.
